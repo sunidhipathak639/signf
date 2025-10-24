@@ -1,0 +1,44 @@
+<svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main logo circle -->
+  <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Stylized hand gesture (representing sign language) -->
+  <g transform="translate(15, 15)">
+    <!-- Palm -->
+    <ellipse cx="15" cy="20" rx="8" ry="12" fill="url(#handGradient)" opacity="0.9"/>
+    
+    <!-- Fingers -->
+    <rect x="10" y="8" width="2.5" height="12" rx="1.25" fill="url(#handGradient)" opacity="0.8"/>
+    <rect x="13" y="6" width="2.5" height="14" rx="1.25" fill="url(#handGradient)" opacity="0.9"/>
+    <rect x="16" y="7" width="2.5" height="13" rx="1.25" fill="url(#handGradient)"/>
+    <rect x="19" y="9" width="2.5" height="11" rx="1.25" fill="url(#handGradient)" opacity="0.8"/>
+    
+    <!-- Thumb -->
+    <ellipse cx="8" cy="18" rx="1.5" ry="4" fill="url(#handGradient)" opacity="0.9" transform="rotate(-30 8 18)"/>
+    
+    <!-- Flow lines (representing communication) -->
+    <path d="M25 15 Q35 10 45 15" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M25 20 Q35 15 45 20" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.4"/>
+    <path d="M25 25 Q35 20 45 25" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.3"/>
+  </g>
+  
+  <!-- Brand text -->
+  <text x="70" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#2d3748">
+    SignFlow
+  </text>
+  <text x="70" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="400" fill="#718096">
+    AI Recognition
+  </text>
+</svg>

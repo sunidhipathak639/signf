@@ -1,0 +1,327 @@
+/* Working Component - Mobile-First Responsive Design */
+.working-section {
+  padding: 4rem 1rem;
+  background: transparent;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none; /* Allow canvas interaction through */
+  touch-action: pan-y; /* Enable vertical scrolling on mobile */
+}
+
+.working-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header Section */
+.working-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.working-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.working-divider {
+  height: 4px;
+  width: 60px;
+  background: var(--gradient-blue);
+  border-radius: 2px;
+  margin: 0 auto 1.5rem;
+}
+
+.working-description {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Main Content */
+.working-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+
+/* Image Section */
+.working-image-container {
+  order: 1;
+}
+
+.working-image-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-large);
+  padding: 1.5rem;
+  transition: transform var(--transition-medium);
+}
+
+.working-image-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.working-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-medium);
+  display: block;
+}
+
+/* Text Content */
+.working-text-content {
+  order: 2;
+  text-align: center;
+}
+
+.working-subtitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: var(--gradient-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.working-text {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons */
+.working-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.working-btn-primary {
+  background: var(--gradient-blue);
+  color: var(--color-text-primary);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-large);
+  cursor: pointer;
+  transition: all var(--transition-medium);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  z-index: 100;
+  pointer-events: auto; /* Ensure button is clickable */
+}
+
+.working-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-large);
+}
+
+/* Steps Section */
+.working-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.working-step-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-large);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.working-step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-blue);
+  transform: scaleX(0);
+  transition: transform var(--transition-medium);
+}
+
+.working-step-card:hover::before {
+  transform: scaleX(1);
+}
+
+.working-step-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-large);
+}
+
+.working-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-blue);
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+.working-step-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.working-step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.working-step-description {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .working-section {
+    padding: 5rem 2rem;
+  }
+
+  .working-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .working-image-container {
+    order: 1;
+  }
+
+  .working-text-content {
+    order: 2;
+    text-align: left;
+  }
+
+  .working-buttons {
+    justify-content: flex-start;
+  }
+
+  .working-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .working-section {
+    padding: 6rem 2rem;
+  }
+
+  .working-content {
+    gap: 4rem;
+  }
+
+  .working-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .working-step-card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1200px) {
+  .working-container {
+    padding: 0 2rem;
+  }
+
+  .working-content {
+    gap: 5rem;
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  .working-section {
+    padding: 3rem 1rem;
+  }
+
+  .working-header {
+    margin-bottom: 2rem;
+  }
+
+  .working-content {
+    margin-bottom: 3rem;
+  }
+
+  .working-step-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .working-btn-primary {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .working-image-wrapper,
+  .working-step-card,
+  .working-btn-primary {
+    transition: none;
+  }
+
+  .working-image-wrapper:hover,
+  .working-step-card:hover,
+  .working-btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .working-step-card {
+    border: 2px solid var(--color-text-secondary);
+  }
+
+  .working-btn-primary {
+    border: 2px solid white;
+  }
+}

@@ -1,0 +1,39 @@
+.interactive-background {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 1;
+  pointer-events: none; /* Allow events to pass through to canvas */
+  touch-action: pan-y; /* Enable vertical scrolling on mobile */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.fluid-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  cursor: default;
+  display: block;
+  pointer-events: auto;
+  z-index: 0; /* Put canvas at base level */
+  touch-action: pan-y; /* Allow vertical scrolling while preserving canvas interaction */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  /* Removed overflow: hidden to allow scrolling */
+  touch-action: pan-y; /* Enable vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+#fluid {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  touch-action: none; /* Prevent fluid canvas from blocking scroll */
+}

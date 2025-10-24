@@ -1,0 +1,706 @@
+/* CTA Section - Mobile First Responsive Design */
+.cta-section {
+  padding: 60px 20px;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* Allow canvas interaction through */
+  /* Mobile scrolling optimizations */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  pointer-events: none;
+}
+
+/* Gradient Background Blur */
+.cta-blur-bg {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.3) 0%, transparent 30%),
+    radial-gradient(circle at 70% 80%, rgba(30, 144, 255, 0.3) 0%, transparent 30%);
+  filter: blur(100px);
+  opacity: 0.6;
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cta-container {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Apple Doodle Animation */
+.apple-doodle {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.apple-icon {
+  animation: appleFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(255, 107, 107, 0.3));
+  transition: all 0.3s ease;
+}
+
+.apple-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 6px 16px rgba(255, 107, 107, 0.5));
+}
+
+.apple-body {
+  animation: appleGlow 2s ease-in-out infinite alternate;
+}
+
+.apple-leaf {
+  animation: leafSway 2.5s ease-in-out infinite;
+  transform-origin: 35px 17px;
+}
+
+.apple-bite {
+  animation: bitePulse 1.5s ease-in-out infinite;
+}
+
+/* Sign Language Doodle Animation */
+.sign-language-doodle {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-icon {
+  animation: signFloat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.4));
+  transition: all 0.3s ease;
+}
+
+.sign-icon:hover {
+  transform: scale(1.1) rotate(-3deg);
+  filter: drop-shadow(0 6px 16px rgba(251, 191, 36, 0.6));
+}
+
+.hand-palm {
+  animation: palmPulse 2s ease-in-out infinite alternate;
+}
+
+.finger {
+  animation: fingerWave 3s ease-in-out infinite;
+}
+
+.finger-1 {
+  animation-delay: 0s;
+}
+
+.finger-2 {
+  animation-delay: 0.2s;
+}
+
+.finger-3 {
+  animation-delay: 0.4s;
+}
+
+.finger-4 {
+  animation-delay: 0.6s;
+}
+
+.thumb {
+  animation: thumbMove 2.5s ease-in-out infinite;
+}
+
+.communication-lines {
+  animation: communicationPulse 2s ease-in-out infinite;
+}
+
+.comm-line {
+  animation: lineFlow 3s ease-in-out infinite;
+}
+
+.line-1 {
+  animation-delay: 0s;
+}
+
+.line-2 {
+  animation-delay: 1.5s;
+}
+
+.comm-dot {
+  animation: dotBlink 1.5s ease-in-out infinite;
+}
+
+.dot-1 {
+  animation-delay: 0.3s;
+}
+
+.dot-2 {
+  animation-delay: 1.8s;
+}
+
+/* Keyframe Animations */
+@keyframes appleFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-8px) rotate(2deg); 
+  }
+}
+
+@keyframes appleGlow {
+  0% { 
+    filter: brightness(1); 
+  }
+  100% { 
+    filter: brightness(1.1); 
+  }
+}
+
+@keyframes leafSway {
+  0%, 100% { 
+    transform: rotate(0deg); 
+  }
+  25% { 
+    transform: rotate(-3deg); 
+  }
+  75% { 
+    transform: rotate(3deg); 
+  }
+}
+
+@keyframes bitePulse {
+  0%, 100% { 
+    opacity: 0.1; 
+  }
+  50% { 
+    opacity: 0.3; 
+  }
+}
+
+@keyframes signFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-6px) rotate(1deg); 
+  }
+}
+
+@keyframes palmPulse {
+  0% { 
+    transform: scale(1); 
+  }
+  100% { 
+    transform: scale(1.05); 
+  }
+}
+
+@keyframes fingerWave {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-2px) rotate(2deg); 
+  }
+  75% { 
+    transform: translateY(1px) rotate(-1deg); 
+  }
+}
+
+@keyframes thumbMove {
+  0%, 100% { 
+    transform: rotate(-30deg) scale(1); 
+  }
+  50% { 
+    transform: rotate(-25deg) scale(1.1); 
+  }
+}
+
+@keyframes communicationPulse {
+  0%, 100% { 
+    opacity: 0.8; 
+  }
+  50% { 
+    opacity: 1; 
+  }
+}
+
+@keyframes lineFlow {
+  0%, 100% { 
+    stroke-dasharray: 0, 20; 
+    opacity: 0.6; 
+  }
+  50% { 
+    stroke-dasharray: 10, 10; 
+    opacity: 1; 
+  }
+}
+
+@keyframes dotBlink {
+  0%, 100% { 
+    opacity: 0.4; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+  }
+}
+
+/* Main CTA Card */
+
+/* Main CTA Card */
+.cta-main-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Typography */
+.cta-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Modern Gradient Title */
+.gradient-title {
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #f5576c 75%,
+    #4facfe 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 4s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3));
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+}
+
+/* Simple Minimal Button */
+.cta-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Apple Memoji Styles */
+.memoji-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: memojiFloat 3s ease-in-out infinite;
+}
+
+.apple-memoji {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.15));
+  transition: all 0.3s ease;
+}
+
+.apple-memoji:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 12px 35px rgba(102, 126, 234, 0.3));
+}
+
+/* Memoji Face Animation */
+.memoji-face {
+  animation: faceGlow 4s ease-in-out infinite alternate;
+}
+
+/* Eye Blinking Animation */
+.memoji-eye {
+  animation: eyeBlink 4s ease-in-out infinite;
+}
+
+.eye-pupil {
+  animation: pupilMove 6s ease-in-out infinite;
+}
+
+.eye-shine {
+  animation: eyeShine 2s ease-in-out infinite;
+}
+
+/* Hair Movement */
+.memoji-hair {
+  animation: hairSway 5s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+/* Eyebrow Expression */
+.memoji-eyebrow {
+  animation: eyebrowRaise 8s ease-in-out infinite;
+}
+
+/* Mouth Expression */
+.memoji-mouth {
+  animation: mouthSmile 6s ease-in-out infinite;
+}
+
+/* Cheek Blush */
+.memoji-cheek {
+  animation: cheekBlush 3s ease-in-out infinite alternate;
+}
+
+/* Keyframe Animations */
+@keyframes memojiFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes faceGlow {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes eyeBlink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes pupilMove {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(1px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes eyeShine {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes hairSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
+}
+
+@keyframes eyebrowRaise {
+  0%, 90%, 100% {
+    transform: translateY(0);
+  }
+  95% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes mouthSmile {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
+}
+
+@keyframes cheekBlush {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Contributors Section */
+.contributors-section {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 2rem;
+}
+
+.contributors-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contributors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.contributor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contributor-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
+}
+
+.contributor-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #8A2BE2 0%, #1E90FF 50%, #FF1493 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.contributor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.contributor-image:hover {
+  transform: scale(1.1);
+}
+
+.contributor-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.contributor-role {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.gradient-button span {
+  position: relative;
+  z-index: 2;
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
+}
+
+.gradient-button:hover .button-glow {
+  left: 100%;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .cta-section {
+    padding: 80px 40px;
+  }
+
+  .cta-main-card {
+    padding: 80px 60px;
+  }
+
+  .cta-title {
+    font-size: 3.5rem;
+  }
+
+  .cta-description {
+    font-size: 1.3rem;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .cta-section {
+    padding: 100px 60px;
+  }
+
+  .cta-main-card {
+    max-width: 700px;
+    padding: 100px 80px;
+  }
+
+  .cta-title {
+    font-size: 4rem;
+  }
+
+  .cta-description {
+    font-size: 1.4rem;
+    max-width: 550px;
+  }
+
+  .cta-icon {
+    font-size: 5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1440px) {
+  .cta-section {
+    padding: 120px 80px;
+  }
+
+  .cta-title {
+    font-size: 4.5rem;
+  }
+
+  .cta-description {
+    font-size: 1.5rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cta-icon,
+  .cta-blur-bg,
+  .gradient-text,
+  .gradient-button {
+    animation: none;
+  }
+  
+  .gradient-button:hover {
+    transform: none;
+  }
+}
+
+/* Focus states for accessibility */
+.gradient-button:focus {
+  outline: 2px solid #8A2BE2;
+  outline-offset: 2px;
+}

@@ -1,0 +1,360 @@
+/* Transparent Header with Blur Effects */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  opacity: 1;
+  padding: 1rem 0;
+}
+
+.nav.scrolled {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0;
+}
+
+.nav.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.nav.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+/* Brand Section */
+.nav-brand {
+  flex: 0 0 auto;
+}
+
+.brand-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.brand-text {
+  color: #ffffff;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.brand-link:hover .brand-text {
+  color: #667eea;
+  text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* Desktop Navigation */
+.nav-ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-ul li {
+  margin: 0;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.auth-button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 25px !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.auth-button:hover {
+  background: rgba(102, 126, 234, 0.2) !important;
+  border-color: rgba(102, 126, 234, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* Mobile Menu Button */
+.burger-white {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.burger-white svg {
+  width: 24px;
+  height: 3px;
+  transition: all 0.3s ease;
+}
+
+.burger-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Dropdown */
+.mobile-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 200px;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}
+
+.mobile-nav-link:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.mobile-nav-link.auth-button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.mobile-nav-link.auth-button:hover {
+  background: rgba(102, 126, 234, 0.2) !important;
+  border-color: rgba(102, 126, 234, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* Tablet Styles */
+@media screen and (max-width: 1024px) {
+  .nav-container {
+    padding: 0 1.5rem;
+  }
+  
+  .nav-ul {
+    gap: 1.5rem;
+  }
+  
+  .brand-text {
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .nav-container {
+    padding: 0 1rem;
+    height: 50px;
+  }
+  
+  .nav-ul {
+    display: none;
+  }
+  
+  .burger-white {
+    display: flex;
+  }
+  
+  .brand-text {
+    font-size: 1.4rem;
+  }
+  
+  .nav.scrolled {
+    padding: 0.25rem 0;
+  }
+}
+
+/* Extra Small Mobile */
+@media screen and (max-width: 480px) {
+  .nav-container {
+    padding: 0 0.75rem;
+  }
+  
+  .brand-text {
+    font-size: 1.2rem;
+  }
+  
+  .mobile-nav-link {
+    width: 180px;
+    font-size: 0.9rem;
+  }
+}
+
+/* High Performance Animations */
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav-link,
+  .brand-link,
+  .burger-white,
+  .mobile-dropdown,
+  .mobile-nav-link {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus States for Accessibility */
+.nav-link:focus,
+.brand-link:focus,
+.burger-white:focus,
+.mobile-nav-link:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .nav.scrolled {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .mobile-dropdown {
+    background: rgba(0, 0, 0, 0.98);
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .nav-link,
+  .brand-text,
+  .mobile-nav-link {
+    color: #ffffff;
+  }
+  
+  .nav.scrolled {
+    border-bottom: 2px solid #ffffff;
+  }
+  
+  .auth-button {
+    border: 2px solid #ffffff !important;
+  }
+}
+
+/* Smooth scrolling for the page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure content doesn't hide behind fixed navbar */
+body {
+  padding-top: 80px;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding-top: 60px; /* Reduced padding for mobile */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding-top: 50px; /* Further reduced for small mobile */
+  }
+}
+
+/* Glass morphism effect enhancement */
+.nav.scrolled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Subtle glow effect on scroll */
+.nav.scrolled {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
