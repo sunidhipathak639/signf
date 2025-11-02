@@ -87,6 +87,7 @@ const Navbar = ({ notifyMsg }) => {
         <ul className="nav-ul">
           <li><Link to="/" className="nav-link">HOME</Link></li>
           <li><Link to="/detect" className="nav-link">DETECT</Link></li>
+          <li><Link to="/health-diagnostics" className="nav-link">AI HEALTH DIAGNOSTICS</Link></li>
           <li>
             {accessToken ? (
               <button 
@@ -114,6 +115,7 @@ const Navbar = ({ notifyMsg }) => {
           <ul className="mobile-nav-ul">
             <li><Link to="/" className="mobile-nav-link" onClick={() => setToggle(false)}>HOME</Link></li>
             <li><Link to="/detect" className="mobile-nav-link" onClick={() => setToggle(false)}>DETECT</Link></li>
+            <li><Link to="/health-diagnostics" className="mobile-nav-link" onClick={() => setToggle(false)}>AI HEALTH DIAGNOSTICS</Link></li>
             <li>
               {accessToken ? (
                 <button 
