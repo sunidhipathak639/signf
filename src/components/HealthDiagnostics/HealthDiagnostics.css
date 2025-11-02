@@ -1,0 +1,262 @@
+.health-diagnostics {
+  min-height: 100vh;
+  background: #000000;
+  padding-top: 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.health-diagnostics::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 188, 212, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 152, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.health-diagnostics .MuiContainer-root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 188, 212, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(0, 188, 212, 0.4); }
+}
+
+/* Section cards enhanced styling */
+.health-diagnostics .MuiCard-root {
+  background: #0a0a0a;
+  border-radius: 12px !important;
+  border: 1px solid #333;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.health-diagnostics .MuiCard-root:hover {
+  background: #1a1a1a;
+  border-color: #00bcd4;
+  box-shadow: 0 8px 25px rgba(0, 188, 212, 0.15);
+}
+
+/* Progress bar enhanced styling */
+.health-diagnostics .MuiLinearProgress-root {
+  border-radius: 8px;
+  height: 6px;
+  background: #333;
+  overflow: hidden;
+}
+
+.health-diagnostics .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, #00bcd4, #4caf50);
+  border-radius: 8px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Alert enhanced styling */
+.health-diagnostics .MuiAlert-root {
+  border-radius: 12px;
+  background: rgba(0, 188, 212, 0.05);
+  border: 1px solid rgba(0, 188, 212, 0.2);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+}
+
+/* Button enhancements */
+.health-diagnostics .MuiButton-root {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.health-diagnostics .MuiButton-contained:hover {
+  transform: translateY(-2px);
+}
+
+.health-diagnostics .MuiButton-outlined:hover {
+  background: rgba(0, 188, 212, 0.1);
+}
+
+/* Chip enhancements */
+.health-diagnostics .MuiChip-root {
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.health-diagnostics .MuiChip-root:hover {
+  transform: translateY(-2px);
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .health-diagnostics {
+    padding-top: 60px;
+  }
+  
+  .health-diagnostics .MuiTypography-h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .health-diagnostics .MuiTypography-h4 {
+    font-size: 1.8rem !important;
+  }
+  
+  .health-diagnostics .MuiCard-root {
+    margin-bottom: 1rem;
+  }
+  
+  .health-diagnostics .MuiCardContent-root {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .health-diagnostics {
+    padding-top: 40px;
+  }
+  
+  .health-diagnostics .MuiContainer-root {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .health-diagnostics .MuiTypography-h1 {
+    font-size: 2rem !important;
+  }
+  
+  .health-diagnostics .MuiButton-root {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .health-diagnostics .MuiChip-root {
+    margin: 0.25rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .health-diagnostics * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus improvements */
+.health-diagnostics .MuiCard-root:focus-within {
+  outline: 2px solid #00bcd4;
+  outline-offset: 2px;
+}
+
+.health-diagnostics .MuiButton-root:focus {
+  outline: 2px solid #00bcd4;
+  outline-offset: 2px;
+}
+
+/* Loading state improvements */
+.health-diagnostics .loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@media (max-width: 480px) {
+  .health-diagnostics .MuiContainer-root {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  .health-diagnostics .MuiGrid-item {
+    padding: 4px !important;
+  }
+  
+  /* Smaller buttons on mobile */
+  .health-diagnostics .MuiButton-root {
+    font-size: 0.875rem;
+    padding: 8px 16px;
+  }
+  
+  /* Adjust form fields for mobile */
+  .health-diagnostics .MuiTextField-root {
+    margin-bottom: 16px;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .health-diagnostics .MuiContainer-root {
+    max-width: 1400px;
+  }
+  
+  .health-diagnostics .MuiGrid-container {
+    justify-content: center;
+  }
+}
+
+/* Loading states */
+.health-diagnostics .loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-radius: 16px;
+}
+
+/* Accessibility improvements */
+.health-diagnostics .MuiCard-root:focus {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+.health-diagnostics .MuiButton-root:focus {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .health-diagnostics {
+    background: #ffffff;
+  }
+  
+  .health-diagnostics .MuiCard-root {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .health-diagnostics * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

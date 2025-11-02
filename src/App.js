@@ -5,6 +5,7 @@ import {
   Footer,
   Home,
   Detect,
+  HealthDiagnostics,
   NotFound,
 } from "./components";
 import { ToastContainer, toast } from "react-toastify";
@@ -51,6 +52,16 @@ function App() {
           element={
             <Layout>
               <Detect />
+            </Layout>
+          }
+        />
+
+        <Route
+          exact
+          path="/health-diagnostics"
+          element={
+            <Layout>
+              <HealthDiagnostics />
             </Layout>
           }
         />
