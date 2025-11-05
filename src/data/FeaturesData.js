@@ -16,19 +16,19 @@ export const WhatfeatureData = [
 
 export const featuresData = [
   {
-    title: "Real-Time Recognition",
-    text: "Our advanced machine learning algorithms enable real-time recognition of sign language gestures, making communication faster and more efficient.",
+    title: "Real-time Detect",
+    text: "Accurate sign recognition powered by modern computer vision.",
   },
   {
-    title: "Easy-to-Use Interface",
-    text: "Our intuitive user interface is designed to be easy to use for people of all ages and skill levels, making it accessible to everyone.",
+    title: "Body Map Diagnostics",
+    text: "Track symptoms on a 2D/3D body map with guided insights.",
   },
   {
-    title: "Adaptive Learning",
-    text: "Our system uses adaptive learning to improve recognition accuracy over time, allowing for continuous improvement and increased efficiency.",
+    title: "Secure Authentication",
+    text: "Seamless Google login with token-based access across features.",
   },
   {
-    title: "High Accuracy",
-    text: "With a high accuracy rate of over 80%, our system ensures that sign language communication is not only faster, but also more accurate.",
+    title: "Unified Experience",
+    text: "Minimal, responsive design for quick navigation and smooth workflows.",
   }
 ];

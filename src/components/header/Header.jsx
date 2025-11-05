@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import SignHand from "../../assests/SignHand.png";
 import './Header.css';
 
@@ -50,10 +51,16 @@ const Header = () => {
         >
           <motion.h1 variants={textVariants}>
             <span className="gradient__text">
-              AI Sign Language
+              SIGNF AI Platform
             </span>
-            <br />Recognition
           </motion.h1>
+          
+          <motion.p 
+            className="header-description"
+            variants={textVariants}
+          >
+            Real-time Sign Detection and advanced Health Diagnostics in one place.
+          </motion.p>
           
           <motion.p 
             className="header-description"
@@ -66,16 +73,12 @@ const Header = () => {
             className="header-cta"
             variants={textVariants}
           >
-            <motion.button 
-              className="cta-primary"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Get Started
-            </motion.button>
+            <Link to="/detect" className="cta-primary" role="button">
+              Start Detect
+            </Link>
+            <Link to="/health-diagnostics" className="cta-secondary" role="button">
+              Explore Health Diagnostics
+            </Link>
           </motion.div>
         </motion.div>
 

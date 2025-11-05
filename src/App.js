@@ -66,6 +66,7 @@ function App() {
           }
         />
 
+
         <Route exact path="*" element={<NotFound />} />
       </Routes>
 

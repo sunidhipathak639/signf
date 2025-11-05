@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Container,
@@ -22,8 +23,11 @@ import {
 import SymptomChecker from './SymptomChecker';
 import BodyMap from './BodyMap';
 import './HealthDiagnostics.css';
+import { login } from '../../redux/actions/authaction';
 
 const HealthDiagnostics = () => {
+  const dispatch = useDispatch();
+  const { accessToken } = useSelector((state) => state.auth);
   const [activeSection, setActiveSection] = useState('symptom-checker');
   
   // Shared state for symptoms between BodyMap and SymptomChecker
@@ -47,17 +51,19 @@ const HealthDiagnostics = () => {
   // Function to add symptoms from BodyMap to shared state
   const addSymptomFromBodyMap = (symptom) => {
     setSharedSymptoms(prev => {
-      // Check if symptom already exists
-      const existingIndex = prev.findIndex(s => s.bodyPart === symptom.bodyPart && s.category === symptom.category);
-      if (existingIndex !== -1) {
-        // Update existing symptom
+      const byId = prev.findIndex(s => s.id === symptom.id);
+      if (byId !== -1) {
         const updated = [...prev];
-        updated[existingIndex] = symptom;
+        updated[byId] = symptom;
         return updated;
-      } else {
-        // Add new symptom
-        return [...prev, symptom];
       }
+      const byKey = prev.findIndex(s => s.bodyPart === symptom.bodyPart && s.category === symptom.category);
+      if (byKey !== -1) {
+        const updated = [...prev];
+        updated[byKey] = symptom;
+        return updated;
+      }
+      return [...prev, symptom];
     });
   };
 
@@ -121,6 +127,26 @@ const HealthDiagnostics = () => {
 
   return (
     <div className="health-diagnostics">
+      {!accessToken && (
+        <Container maxWidth="md" sx={{ py: 8 }}>
+          <Box textAlign="center" sx={{ color: '#fff' }}>
+            <Typography variant="h3" sx={{ fontWeight: 700, mb: 2 }}>
+              Authentication Required
+            </Typography>
+            <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 4 }}>
+              Please login to access SIGNF Health Diagnostics.
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Chip label="Secure Access" icon={<Security />} sx={{ mr: 2 }} />
+              <Chip label="Personalized Insights" icon={<HealthAndSafety />} />
+            </Box>
+            <Box sx={{ mt: 4 }}>
+              <Chip label="Login with Google" onClick={() => dispatch(login())} sx={{ cursor: 'pointer', p: 2 }} />
+            </Box>
+          </Box>
+        </Container>
+      )}
+      {accessToken && (
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {/* Enhanced Header Section */}
         <Fade in={true} timeout={1000}>
@@ -402,6 +428,7 @@ const HealthDiagnostics = () => {
           </Box>
         </Fade>
       </Container>
+      )}
     </div>
   );
 };

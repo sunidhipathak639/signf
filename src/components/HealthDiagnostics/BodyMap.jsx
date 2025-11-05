@@ -54,6 +54,8 @@ import {
   Download,
   Assessment
 } from '@mui/icons-material';
+import ThreeDBodyRaw from './ThreeDBodyRaw';
+import EditSymptomModal from './EditSymptomModal';
 
 const BodyMap = ({ 
   selectedSymptoms: externalSelectedSymptoms = [], 
@@ -62,22 +64,24 @@ const BodyMap = ({
 }) => {
   // Use external symptoms if provided, otherwise use local state
   const [localSelectedSymptoms, setLocalSelectedSymptoms] = useState([]);
-  const selectedSymptoms = externalSelectedSymptoms.length > 0 ? externalSelectedSymptoms : localSelectedSymptoms;
+  const selectedSymptoms = onAddSymptom ? externalSelectedSymptoms : localSelectedSymptoms;
   
   // Update local state setter to use external callback if provided
   const setSelectedSymptoms = onAddSymptom ? 
-    (newSymptoms) => {
-      if (typeof newSymptoms === 'function') {
-        const updated = newSymptoms(selectedSymptoms);
-        // Handle array updates
-        if (Array.isArray(updated)) {
-          // Find new symptoms and add them
-          updated.forEach(symptom => {
-            if (!selectedSymptoms.find(s => s.id === symptom.id)) {
-              onAddSymptom(symptom);
-            }
-          });
-        }
+    (next) => {
+      const updated = typeof next === 'function' ? next(selectedSymptoms) : next;
+      if (!Array.isArray(updated)) return;
+      const updatedIds = new Set(updated.map(s => s.id));
+      const currentIds = new Set(selectedSymptoms.map(s => s.id));
+      updated.forEach(symptom => {
+        onAddSymptom(symptom);
+      });
+      if (onRemoveSymptom) {
+        selectedSymptoms.forEach(s => {
+          if (!updatedIds.has(s.id)) {
+            onRemoveSymptom(s.id);
+          }
+        });
       }
     } : 
     setLocalSelectedSymptoms;
@@ -95,6 +99,10 @@ const BodyMap = ({
   const [animationFrame, setAnimationFrame] = useState(0);
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
+  const [is3DView, setIs3DView] = useState(true);
+  const [editOpen, setEditOpen] = useState(false);
+  const [editCategory, setEditCategory] = useState('pain');
+  const [editIntensity, setEditIntensity] = useState(5);
 
   // Enhanced body parts with more anatomical accuracy and 3D coordinates
   const bodyParts = {
@@ -833,8 +841,52 @@ const BodyMap = ({
         y <= part.y + part.height
       ) {
         setSelectedBodyPart(partId);
+        const existing = selectedSymptoms.find(s => s.bodyPart === partId) || null;
+        setEditCategory(existing ? existing.category : 'pain');
+        setEditIntensity(existing ? existing.intensity : 5);
+        setEditOpen(true);
       }
     });
+  };
+
+  const handleSelectPart3D = (partId) => {
+    setSelectedBodyPart(partId);
+    const existing = selectedSymptoms.find(s => s.bodyPart === partId) || null;
+    setEditCategory(existing ? existing.category : 'pain');
+    setEditIntensity(existing ? existing.intensity : 5);
+    setEditOpen(true);
+  };
+
+  const handleSaveEdit = ({ category, intensity }) => {
+    setEditOpen(false);
+    if (!selectedBodyPart) return;
+    const existing = selectedSymptoms.find(s => s.bodyPart === selectedBodyPart) || null;
+    const updatedSymptom = {
+      id: existing ? existing.id : Date.now(),
+      bodyPart: selectedBodyPart,
+      category,
+      intensity: intensity ?? symptomIntensity,
+      timestamp: new Date().toISOString(),
+      bodyPartLabel: bodyParts[viewMode][selectedBodyPart]?.label || selectedBodyPart
+    };
+
+    if (onAddSymptom) {
+      if (existing && onRemoveSymptom && existing.category !== category) {
+        onRemoveSymptom(existing.id);
+      }
+      onAddSymptom(updatedSymptom);
+    } else {
+      setLocalSelectedSymptoms(prev => {
+        const idx = prev.findIndex(s => s.bodyPart === selectedBodyPart);
+        if (idx !== -1) {
+          const next = [...prev];
+          next[idx] = updatedSymptom;
+          return next;
+        }
+        return [...prev, updatedSymptom];
+      });
+    }
+    setSelectedBodyPart(null);
   };
 
   const handleMouseDown = (event) => {
@@ -848,21 +900,17 @@ const BodyMap = ({
     setIsDragging(false);
   };
 
-  const handleWheel = (event) => {
-    event.preventDefault();
-    const delta = event.deltaY > 0 ? 0.9 : 1.1;
-    setZoomLevel(prev => Math.max(0.5, Math.min(3, prev * delta)));
-  };
+  
 
   // Rest of the component methods remain similar but with enhanced styling...
-  const addSymptom = (category) => {
+  const addSymptom = (category, intensityOverride) => {
     if (!selectedBodyPart) return;
 
     const newSymptom = {
       id: Date.now(),
       bodyPart: selectedBodyPart,
       category,
-      intensity: symptomIntensity,
+      intensity: intensityOverride ?? symptomIntensity,
       timestamp: new Date().toISOString(),
       bodyPartLabel: bodyParts[viewMode][selectedBodyPart]?.label || selectedBodyPart
     };
@@ -883,12 +931,7 @@ const BodyMap = ({
     }
   };
 
-  const resetView = () => {
-    setZoomLevel(1);
-    setPanOffset({ x: 0, y: 0 });
-    setSelectedBodyPart(null);
-    setHoveredBodyPart(null);
-  };
+
 
   const getIntensityColor = (intensity) => {
     if (intensity <= 3) return '#4caf50';
@@ -910,191 +953,6 @@ const BodyMap = ({
       color: '#ffffff'
     }}>
       <Grid container spacing={{ xs: 2, sm: 3 }}>
-        {/* Enhanced Control Panel */}
-        <Grid item xs={12} lg={3}>
-          <Card sx={{ 
-            mb: 2,
-            backgroundColor: '#0a0a0a',
-            border: '1px solid #333',
-            borderRadius: 2,
-            boxShadow: '0 8px 32px rgba(0, 188, 212, 0.1)'
-          }}>
-            <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-              <Typography 
-                variant="h6" 
-                gutterBottom 
-                sx={{ 
-                  color: '#00bcd4', 
-                  fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                  fontWeight: 'bold',
-                  textShadow: '0 0 10px rgba(0, 188, 212, 0.5)'
-                }}
-              >
-                <ThreeDRotation sx={{ mr: 1, verticalAlign: 'middle' }} />
-                SIGNF 3D Body Map
-              </Typography>
-              
-              <FormControl fullWidth margin="normal">
-                <InputLabel sx={{ color: '#b0b0b0' }}>View Mode</InputLabel>
-                <Select
-                  value={viewMode}
-                  onChange={(e) => setViewMode(e.target.value)}
-                  sx={{
-                    color: '#ffffff',
-                    '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#333',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#00bcd4',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#00bcd4',
-                    },
-                    '& .MuiSvgIcon-root': {
-                      color: '#b0b0b0',
-                    },
-                  }}
-                >
-                  <MenuItem value="front" sx={{ color: '#ffffff', backgroundColor: '#1a1a1a' }}>
-                    <ViewInAr sx={{ mr: 1 }} /> Front View
-                  </MenuItem>
-                  <MenuItem value="back" sx={{ color: '#ffffff', backgroundColor: '#1a1a1a' }}>
-                    <ViewInAr sx={{ mr: 1 }} /> Back View
-                  </MenuItem>
-                  <MenuItem value="side" sx={{ color: '#ffffff', backgroundColor: '#1a1a1a' }}>
-                    <ViewInAr sx={{ mr: 1 }} /> Side View
-                  </MenuItem>
-                </Select>
-              </FormControl>
-
-              <Box sx={{ mt: 2, mb: 2 }}>
-                <Typography variant="body2" sx={{ color: '#b0b0b0', mb: 1 }}>
-                  Zoom: {Math.round(zoomLevel * 100)}%
-                </Typography>
-                <Slider
-                  value={zoomLevel}
-                  onChange={(e, value) => setZoomLevel(value)}
-                  min={0.5}
-                  max={3}
-                  step={0.1}
-                  sx={{
-                    color: '#00bcd4',
-                    '& .MuiSlider-thumb': {
-                      backgroundColor: '#00bcd4',
-                      boxShadow: '0 0 10px rgba(0, 188, 212, 0.5)',
-                    },
-                    '& .MuiSlider-track': {
-                      backgroundColor: '#00bcd4',
-                    },
-                    '& .MuiSlider-rail': {
-                      backgroundColor: '#333',
-                    },
-                  }}
-                />
-              </Box>
-
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={showLabels}
-                    onChange={(e) => setShowLabels(e.target.checked)}
-                    sx={{
-                      '& .MuiSwitch-switchBase.Mui-checked': {
-                        color: '#00bcd4',
-                      },
-                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                        backgroundColor: '#00bcd4',
-                      },
-                    }}
-                  />
-                }
-                label={<span style={{ color: '#ffffff' }}>Show Labels</span>}
-                sx={{ mt: 1, display: 'block' }}
-              />
-
-              <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  onClick={resetView}
-                  sx={{
-                    borderColor: '#00bcd4',
-                    color: '#00bcd4',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0, 188, 212, 0.1)',
-                      borderColor: '#00e5ff',
-                    }
-                  }}
-                >
-                  <Refresh sx={{ mr: 0.5 }} fontSize="small" />
-                  Reset
-                </Button>
-                
-                <Button
-                  variant="outlined"
-                  size="small"
-                  onClick={() => setIsFullscreen(!isFullscreen)}
-                  sx={{
-                    borderColor: '#00bcd4',
-                    color: '#00bcd4',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0, 188, 212, 0.1)',
-                      borderColor: '#00e5ff',
-                    }
-                  }}
-                >
-                  {isFullscreen ? <FullscreenExit /> : <Fullscreen />}
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-
-          {/* Symptom Categories Legend */}
-          <Card sx={{ 
-            mb: 2,
-            backgroundColor: '#0a0a0a',
-            border: '1px solid #333',
-            borderRadius: 2
-          }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ color: '#00bcd4', fontWeight: 'bold' }}>
-                Symptom Categories
-              </Typography>
-              
-              {Object.entries(symptomCategories).map(([category, info]) => (
-                <Box key={category} sx={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  mb: 1,
-                  p: 1,
-                  borderRadius: 1,
-                  backgroundColor: 'rgba(255, 255, 255, 0.02)',
-                  border: `1px solid ${info.color}20`
-                }}>
-                  <Box
-                    sx={{
-                      width: 20,
-                      height: 20,
-                      backgroundColor: info.color,
-                      borderRadius: '50%',
-                      mr: 2,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '12px',
-                      boxShadow: `0 0 10px ${info.glowColor}50`
-                    }}
-                  >
-                    {info.icon}
-                  </Box>
-                  <Typography variant="body2" sx={{ color: '#ffffff' }}>
-                    {info.label}
-                  </Typography>
-                </Box>
-              ))}
-            </CardContent>
-          </Card>
-        </Grid>
 
         {/* Enhanced Body Map Canvas */}
         <Grid item xs={12} lg={6}>
@@ -1122,26 +980,7 @@ const BodyMap = ({
                   <TouchApp sx={{ mr: 1, verticalAlign: 'middle' }} />
                   Interactive 3D Body Map
                 </Typography>
-                
-                <ButtonGroup variant="outlined" size="small">
-                  {['front', 'back', 'side'].map((view) => (
-                    <Button
-                      key={view}
-                      variant={viewMode === view ? 'contained' : 'outlined'}
-                      onClick={() => setViewMode(view)}
-                      sx={{
-                        backgroundColor: viewMode === view ? '#00bcd4' : 'transparent',
-                        borderColor: '#00bcd4',
-                        color: viewMode === view ? '#000' : '#00bcd4',
-                        '&:hover': {
-                          backgroundColor: viewMode === view ? '#00acc1' : 'rgba(0, 188, 212, 0.1)',
-                        }
-                      }}
-                    >
-                      {view.charAt(0).toUpperCase() + view.slice(1)}
-                    </Button>
-                  ))}
-                </ButtonGroup>
+              
               </Box>
 
               {/* Canvas Container */}
@@ -1160,28 +999,47 @@ const BodyMap = ({
                   background: 'radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%)'
                 }}
               >
-                <canvas
-                  ref={canvasRef}
-                  width={500}
-                  height={850}
-                  onMouseMove={handleCanvasMouseMove}
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onWheel={handleWheel}
-                  style={{ 
-                    cursor: isDragging ? 'grabbing' : 'grab',
-                    border: '1px solid #333',
-                    borderRadius: '8px',
-                    backgroundColor: '#0a0a0a',
-                    maxWidth: '100%',
-                    height: 'auto',
-                    boxShadow: '0 0 30px rgba(0, 188, 212, 0.2)'
-                  }}
+                {is3DView ? (
+                  <ThreeDBodyRaw onSelectPart={handleSelectPart3D} showControls={true} />
+                ) : (
+                  <canvas
+                    ref={canvasRef}
+                    width={500}
+                    height={850}
+                    onMouseMove={handleCanvasMouseMove}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onClick={handleCanvasClick}
+                    style={{ 
+                      cursor: isDragging ? 'grabbing' : 'grab',
+                      border: '1px solid #333',
+                      borderRadius: '8px',
+                      backgroundColor: '#0a0a0a',
+                      maxWidth: '100%',
+                      height: 'auto',
+                      boxShadow: '0 0 30px rgba(0, 188, 212, 0.2)'
+                    }}
+                  />
+                )}
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 2 }}>
+                <FormControlLabel 
+                  control={<Switch checked={is3DView} onChange={(e) => setIs3DView(e.target.checked)} color="primary" />}
+                  label={<Typography sx={{ color: '#ffffff' }}>3D View</Typography>}
                 />
               </Box>
 
-              {/* Enhanced Instructions */}
+              <EditSymptomModal 
+                open={editOpen}
+                onClose={() => setEditOpen(false)}
+                onSave={handleSaveEdit}
+                symptomCategories={symptomCategories}
+                initialCategory={editCategory}
+                initialIntensity={editIntensity}
+              />
+
               <Alert 
                 severity="info" 
                 sx={{ 
@@ -1195,7 +1053,7 @@ const BodyMap = ({
                 }}
               >
                 <Typography variant="body2" sx={{ color: '#ffffff' }}>
-                  <strong>Interactive Controls:</strong> Click body parts to select • Scroll to zoom • Drag to pan • 
+                  <strong>Interactive Controls:</strong> Click body parts to select • Drag to pan • 
                   Hover for highlights • Use view buttons to rotate the 3D model
                 </Typography>
               </Alert>
@@ -1277,9 +1135,10 @@ const BodyMap = ({
             </CardContent>
           </Card>
         </Grid>
+        
 
         {/* Enhanced Recorded Symptoms Section */}
-        <Grid item xs={12} lg={4}>
+        <Grid item xs={12} lg={12}>
           <Card sx={{
             mb: 3,
             backgroundColor: '#0a0a0a',
@@ -1290,9 +1149,9 @@ const BodyMap = ({
             maxHeight: 'calc(100vh - 40px)',
             overflow: 'auto'
           }}>
-            <CardContent>
+            <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="h6" sx={{ color: '#00bcd4', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
+                <Typography variant="h5" sx={{ color: '#00bcd4', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
                   <Badge badgeContent={selectedSymptoms.length} color="primary" sx={{ mr: 2 }}>
                     <Healing />
                   </Badge>
@@ -1326,7 +1185,7 @@ const BodyMap = ({
                   <Grid container spacing={1}>
                     <Grid item xs={6}>
                       <Paper sx={{ 
-                        p: 1.5, 
+                        p: 2, 
                         backgroundColor: '#1a1a1a', 
                         border: '1px solid #333',
                         textAlign: 'center'
@@ -1341,7 +1200,7 @@ const BodyMap = ({
                     </Grid>
                     <Grid item xs={6}>
                       <Paper sx={{ 
-                        p: 1.5, 
+                        p: 2, 
                         backgroundColor: '#1a1a1a', 
                         border: '1px solid #333',
                         textAlign: 'center'
@@ -1364,7 +1223,7 @@ const BodyMap = ({
               {selectedSymptoms.length === 0 ? (
                 <Box sx={{ 
                   textAlign: 'center', 
-                  py: 4,
+                  py: 6,
                   border: '2px dashed #333',
                   borderRadius: 2,
                   backgroundColor: '#1a1a1a'
@@ -1388,15 +1247,13 @@ const BodyMap = ({
                       • Choose symptom category from the panel
                       <br />
                       • Adjust intensity with the slider
-                      <br />
-                      • Use zoom controls for better precision
                     </Typography>
                   </Box>
                 </Box>
               ) : (
                 <Box>
                   {/* Filter and Sort Options */}
-                  <Box sx={{ mb: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                  <Box sx={{ mb: 2, display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
                     <Chip
                       label="Sort by Intensity"
                       size="small"

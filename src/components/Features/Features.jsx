@@ -39,9 +39,9 @@ const Features = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="features-title">Key Features</h2>
+          <h2 className="features-title">Platform Features</h2>
           <p className="features-description">
-            Discover powerful tools designed for seamless sign language recognition
+            Explore real-time Sign Detection and advanced AI Health Diagnostics
           </p>
         </motion.div>
 

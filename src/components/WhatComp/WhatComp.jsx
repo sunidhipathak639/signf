@@ -66,10 +66,10 @@ const WhatComp = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.h2 className="feature__title gradient-text" variants={cardVariants}>
-            What is Sign Language?
+            Introducing SIGNF AI Platform
           </motion.h2>
           <motion.p className="feature__text" variants={cardVariants}>
-            A visual language using hand gestures and expressions to communicate.
+            Unified experience for Real-time Sign Detection and AI Health Diagnostics.
           </motion.p>
         </motion.div>
 
@@ -145,19 +145,19 @@ const WhatComp = () => {
         >
           {[
             { 
-              icon: "👋", 
-              title: "Hand Gestures", 
-              description: "Precise movements that form the foundation of communication." 
+              icon: "⚡", 
+              title: "Real-time Detect", 
+              description: "Accurate sign recognition powered by modern computer vision." 
             },
             { 
-              icon: "😊", 
-              title: "Expressions", 
-              description: "Facial cues that convey emotions and context." 
+              icon: "🩺", 
+              title: "AI Health Diagnostics", 
+              description: "Interactive body map with symptom tracking and insights." 
             },
             { 
-              icon: "🌍", 
-              title: "Universal", 
-              description: "Connects people across cultures and communities." 
+              icon: "🔐", 
+              title: "Secure Login", 
+              description: "Seamless Google authentication to personalize your experience." 
             }
           ].map((feature, index) => (
             <motion.div
