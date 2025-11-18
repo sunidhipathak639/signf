@@ -47,6 +47,11 @@
   50% { box-shadow: 0 0 20px rgba(0, 188, 212, 0.4); }
 }
 
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Section cards enhanced styling */
 .health-diagnostics .MuiCard-root {
   background: #0a0a0a;
