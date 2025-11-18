@@ -44,10 +44,9 @@ const CTA = () => {
           
           {/* Main CTA Content */}
           <div className="cta-main-card">
-            <h2 className="cta-title gradient-title">Explore SIGNF AI</h2>
+            <h2 className="cta-title gradient-title">Start Your Health Journey</h2>
             <div className="cta-actions">
-              <Link to="/detect" className="cta-button">Start Detect</Link>
-              <Link to="/health-diagnostics" className="cta-button secondary">Health Diagnostics</Link>
+              <Link to="/health-diagnostics" className="cta-button">Start Health Diagnostics</Link>
             </div>
           </div>
 

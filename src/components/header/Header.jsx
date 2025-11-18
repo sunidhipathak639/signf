@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import SignHand from "../../assests/SignHand.png";
 import './Header.css';
 
 const Header = () => {
@@ -51,7 +50,7 @@ const Header = () => {
         >
           <motion.h1 variants={textVariants}>
             <span className="gradient__text">
-              SIGNF AI Platform
+              AI Health Diagnostics Platform
             </span>
           </motion.h1>
           
@@ -59,25 +58,22 @@ const Header = () => {
             className="header-description"
             variants={textVariants}
           >
-            Real-time Sign Detection and advanced Health Diagnostics in one place.
+            Advanced AI-powered health diagnostics with interactive body map and symptom tracking.
           </motion.p>
           
           <motion.p 
             className="header-description"
             variants={textVariants}
           >
-            Learn and practice sign language with real-time AI recognition.
+            Get personalized health insights and track your symptoms with cutting-edge artificial intelligence.
           </motion.p>
 
           <motion.div 
             className="header-cta"
             variants={textVariants}
           >
-            <Link to="/detect" className="cta-primary" role="button">
-              Start Detect
-            </Link>
-            <Link to="/health-diagnostics" className="cta-secondary" role="button">
-              Explore Health Diagnostics
+            <Link to="/health-diagnostics" className="cta-primary" role="button">
+              Start Health Diagnostics
             </Link>
           </motion.div>
         </motion.div>
@@ -86,10 +82,9 @@ const Header = () => {
           className="signlang__header-image"
           variants={imageVariants}
         >
-          <img 
-            src={SignHand} 
-            alt="Sign Language"
-          />
+          <div className="health-icon-placeholder">
+            <span style={{ fontSize: '120px' }}>🩺</span>
+          </div>
         </motion.div>
       </div>
     </section>

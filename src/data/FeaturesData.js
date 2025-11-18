@@ -16,19 +16,19 @@ export const WhatfeatureData = [
 
 export const featuresData = [
   {
-    title: "Real-time Detect",
-    text: "Accurate sign recognition powered by modern computer vision.",
+    title: "Body Map Diagnostics",
+    text: "Track symptoms on a 2D/3D body map with guided insights and visual representation.",
   },
   {
-    title: "Body Map Diagnostics",
-    text: "Track symptoms on a 2D/3D body map with guided insights.",
+    title: "AI-Powered Analysis",
+    text: "Get intelligent health recommendations based on your symptoms and medical history.",
   },
   {
     title: "Secure Authentication",
-    text: "Seamless Google login with token-based access across features.",
+    text: "Seamless Google login with token-based access to protect your health data.",
   },
   {
-    title: "Unified Experience",
-    text: "Minimal, responsive design for quick navigation and smooth workflows.",
+    title: "Comprehensive Tracking",
+    text: "Monitor your health over time with detailed symptom logs and progress reports.",
   }
 ];

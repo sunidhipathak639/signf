@@ -30,27 +30,27 @@ const Working = () => {
   const steps = [
     {
       number: "01",
-      title: "Position Your Hand",
-      description: "Place your hand in front of the camera",
-      icon: "👋"
+      title: "Select Body Area",
+      description: "Choose the area on the interactive body map where you're experiencing symptoms",
+      icon: "🩺"
     },
     {
       number: "02", 
-      title: "Make the Sign",
-      description: "Form the sign language gesture clearly",
-      icon: "🤟"
+      title: "Track Symptoms",
+      description: "Log your symptoms with detailed descriptions and severity levels",
+      icon: "📝"
     },
     {
       number: "03",
-      title: "Get Recognition",
-      description: "Our AI instantly recognizes your sign",
+      title: "AI Analysis",
+      description: "Our AI analyzes your symptoms and provides personalized insights",
       icon: "🧠"
     },
     {
       number: "04",
-      title: "See Results",
-      description: "View the translated text",
-      icon: "💬"
+      title: "View Insights",
+      description: "Get comprehensive health recommendations and track your progress",
+      icon: "📊"
     }
   ];
 
@@ -67,7 +67,7 @@ const Working = () => {
           <h2 className="working-title">How It Works</h2>
           <div className="working-divider" />
           <p className="working-description">
-            Experience seamless sign language recognition with our AI technology
+            Experience seamless AI-powered health diagnostics with our advanced technology
           </p>
         </motion.div>
 
@@ -84,7 +84,7 @@ const Working = () => {
             <div className="working-image-wrapper">
               <img 
                 src={WorkingImg} 
-                alt="Sign Language Recognition Process" 
+                alt="AI Health Diagnostics Process" 
                 className="working-image"
               />
             </div>
@@ -100,8 +100,8 @@ const Working = () => {
           >
             <h3 className="working-subtitle">Simple & Intuitive Process</h3>
             <p className="working-text">
-              Our AI technology makes sign language recognition effortless and accurate. 
-              Follow these simple steps to start communicating.
+              Our AI technology makes health diagnostics effortless and accurate. 
+              Follow these simple steps to start tracking your health and getting personalized insights.
             </p>
 
             <div className="working-buttons">
@@ -110,7 +110,7 @@ const Working = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Try Recognition
+                Start Health Diagnostics
               </motion.button>
             </div>
           </motion.div>

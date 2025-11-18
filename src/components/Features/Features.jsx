@@ -27,7 +27,7 @@ const Features = () => {
     }
   };
 
-  const featureIcons = ['🚀', '🎯', '🧠', '⚡'];
+  const featureIcons = ['🩺', '🧠', '🔐', '📊'];
 
   return (
     <section className="features-section" id="features">
@@ -41,7 +41,7 @@ const Features = () => {
         >
           <h2 className="features-title">Platform Features</h2>
           <p className="features-description">
-            Explore real-time Sign Detection and advanced AI Health Diagnostics
+            Discover advanced AI Health Diagnostics with comprehensive symptom tracking and analysis
           </p>
         </motion.div>
 

@@ -66,10 +66,10 @@ const WhatComp = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.h2 className="feature__title gradient-text" variants={cardVariants}>
-            Introducing SIGNF AI Platform
+            Introducing AI Health Diagnostics Platform
           </motion.h2>
           <motion.p className="feature__text" variants={cardVariants}>
-            Unified experience for Real-time Sign Detection and AI Health Diagnostics.
+            Advanced AI-powered health diagnostics with interactive body map and comprehensive symptom tracking.
           </motion.p>
         </motion.div>
 
@@ -113,7 +113,7 @@ const WhatComp = () => {
                   </div>
                   <div className="login-message premium-message">
                     <h4 className="gradient-text premium-greeting">Hello, {user.name}!</h4>
-                    <p className="premium-subtitle">Welcome back to SignFlow</p>
+                    <p className="premium-subtitle">Welcome back to Health Diagnostics</p>
                   </div>
                 </div>
               ) : (
@@ -145,19 +145,19 @@ const WhatComp = () => {
         >
           {[
             { 
-              icon: "⚡", 
-              title: "Real-time Detect", 
-              description: "Accurate sign recognition powered by modern computer vision." 
-            },
-            { 
               icon: "🩺", 
               title: "AI Health Diagnostics", 
-              description: "Interactive body map with symptom tracking and insights." 
+              description: "Interactive body map with symptom tracking and comprehensive health insights." 
+            },
+            { 
+              icon: "📊", 
+              title: "Symptom Analysis", 
+              description: "Track and analyze symptoms with AI-powered recommendations and insights." 
             },
             { 
               icon: "🔐", 
               title: "Secure Login", 
-              description: "Seamless Google authentication to personalize your experience." 
+              description: "Seamless Google authentication to personalize your health tracking experience." 
             }
           ].map((feature, index) => (
             <motion.div
