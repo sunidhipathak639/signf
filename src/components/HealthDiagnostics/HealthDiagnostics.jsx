@@ -917,7 +917,7 @@ const HealthDiagnostics = () => {
                   fontWeight: 400
                 }}
               >
-                © 2024 AI Health Diagnostics - Advanced Healthcare Technology Solutions
+                © 2025 AI Health Diagnostics - Advanced Healthcare Technology Solutions
               </Typography>
             </Box>
           </Box>
