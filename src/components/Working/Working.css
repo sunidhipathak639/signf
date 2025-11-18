@@ -80,6 +80,205 @@
   display: block;
 }
 
+/* AI Health Visual Styles */
+.ai-health-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.health-visual-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.15) 0%, rgba(88, 86, 214, 0.1) 50%, transparent 70%);
+  border-radius: 50%;
+  animation: pulseGlow 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+}
+
+.health-visual-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 280px;
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(88, 86, 214, 0.1) 100%);
+  border-radius: 50%;
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 70px rgba(0, 122, 255, 0.25), inset 0 0 50px rgba(0, 122, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.working-image-wrapper:hover .health-visual-main {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 30px 80px rgba(0, 122, 255, 0.35), inset 0 0 60px rgba(0, 122, 255, 0.15);
+}
+
+.health-visual-icon {
+  font-size: 120px;
+  display: block;
+  filter: drop-shadow(0 4px 15px rgba(0, 122, 255, 0.4));
+  animation: floatIcon 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+.health-visual-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.health-visual-particles .particle {
+  position: absolute;
+  font-size: 32px;
+  animation: orbitParticle 10s linear infinite;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 8px rgba(0, 122, 255, 0.3));
+}
+
+.health-visual-particles .particle-1 {
+  animation-delay: 0s;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.health-visual-particles .particle-2 {
+  animation-delay: 2.5s;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.health-visual-particles .particle-3 {
+  animation-delay: 5s;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.health-visual-particles .particle-4 {
+  animation-delay: 7.5s;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes orbitParticle {
+  0% {
+    transform: rotate(0deg) translateX(160px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(160px) rotate(-360deg);
+  }
+}
+
+.health-visual-waves {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.health-visual-waves .wave {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 122, 255, 0.2);
+  animation: waveExpand 3s ease-out infinite;
+}
+
+.health-visual-waves .wave-1 {
+  width: 100%;
+  height: 100%;
+  animation-delay: 0s;
+}
+
+.health-visual-waves .wave-2 {
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  animation-delay: 1s;
+}
+
+.health-visual-waves .wave-3 {
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  animation-delay: 2s;
+}
+
+@keyframes waveExpand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.health-visual-label {
+  margin-top: 2rem;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.label-text {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.label-subtext {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  opacity: 0.9;
+}
+
 /* Text Content */
 .working-text-content {
   order: 2;
@@ -298,6 +497,41 @@
     width: 100%;
     max-width: 280px;
   }
+
+  .ai-health-visual {
+    min-height: 300px;
+    padding: 1.5rem;
+  }
+
+  .health-visual-main {
+    width: 220px;
+    height: 220px;
+  }
+
+  .health-visual-icon {
+    font-size: 90px;
+  }
+
+  .health-visual-particles .particle {
+    font-size: 24px;
+  }
+
+  @keyframes orbitParticle {
+    0% {
+      transform: rotate(0deg) translateX(120px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(120px) rotate(-360deg);
+    }
+  }
+
+  .label-text {
+    font-size: 20px;
+  }
+
+  .label-subtext {
+    font-size: 14px;
+  }
 }
 
 /* Accessibility */
@@ -311,6 +545,17 @@
   .working-image-wrapper:hover,
   .working-step-card:hover,
   .working-btn-primary:hover {
+    transform: none;
+  }
+
+  .health-visual-glow,
+  .health-visual-icon,
+  .health-visual-particles .particle,
+  .health-visual-waves .wave {
+    animation: none;
+  }
+
+  .health-visual-main:hover {
     transform: none;
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import WorkingImg from "../../assests/Working.png";
 import './Working.css';
 
 const Working = () => {
@@ -82,11 +81,27 @@ const Working = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="working-image-wrapper">
-              <img 
-                src={WorkingImg} 
-                alt="AI Health Diagnostics Process" 
-                className="working-image"
-              />
+              <div className="ai-health-visual">
+                <div className="health-visual-glow"></div>
+                <div className="health-visual-main">
+                  <div className="health-visual-icon">🩺</div>
+                  <div className="health-visual-particles">
+                    <span className="particle particle-1">💊</span>
+                    <span className="particle particle-2">❤️</span>
+                    <span className="particle particle-3">🔬</span>
+                    <span className="particle particle-4">📊</span>
+                  </div>
+                  <div className="health-visual-waves">
+                    <div className="wave wave-1"></div>
+                    <div className="wave wave-2"></div>
+                    <div className="wave wave-3"></div>
+                  </div>
+                </div>
+                <div className="health-visual-label">
+                  <span className="label-text">AI-Powered</span>
+                  <span className="label-subtext">Health Diagnostics</span>
+                </div>
+              </div>
             </div>
           </motion.div>
 
